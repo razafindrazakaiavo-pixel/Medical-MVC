@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee" version="6.0">
+    <display-name>Medical</display-name>
+
+    <context-param>
+        <param-name>base-package</param-name>
+        <param-value>iavo.main.controller</param-value>
+    </context-param>
+    <context-param>
+        <param-name>view-prefix</param-name>
+        <param-value>/WEB-INF/jsp/</param-value>
+    </context-param>
+    <context-param>
+        <param-name>view-suffix</param-name>
+        <param-value>.jsp</param-value>
+    </context-param>
+
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+        </jsp-property-group>
+    </jsp-config>
+
+    <request-character-encoding>UTF-8</request-character-encoding>
+    <session-config>
+        <session-timeout>20</session-timeout>
+        <cookie-config>
+            <http-only>true</http-only>
+        </cookie-config>
+        <tracking-mode>COOKIE</tracking-mode>
+    </session-config>
+
+    <servlet>
+        <servlet-name>FrontController</servlet-name>
+        <servlet-class>src.FrontControllerServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+<servlet-mapping>
+        <servlet-name>FrontController</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+</web-app>
+
+
