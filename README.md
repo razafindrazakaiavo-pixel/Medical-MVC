@@ -78,3 +78,27 @@ Get-Content -Raw -Encoding UTF8 .\sql\donnees-demo.sql | & 'C:\xampp\mysql\bin\m
 ```
 
 Identifiant médecin : `demo.medecin`. Identifiants patients : `demo.aina`, `demo.mamy`, `demo.voahangy`. Le mot de passe commun est `DemoMedical123!`. Ces comptes connus et ces données fictives servent uniquement aux essais locaux.
+
+
+## QR codes des patients
+
+Chaque QR code contient une URL vers `/api/patient?id=<identifiant>`. Cette API renvoie uniquement l'identifiant, le nom et le prénom du patient au format JSON. Le médecin ou le patient concerné doit être connecté dans le navigateur qui ouvre l'URL ; les autres utilisateurs n'ont pas accès aux informations. Le médecin peut le voir depuis la liste ou le dossier du patient ; le patient connecté peut voir le sien sur son profil. L'accès aux images est réservé au médecin et au patient concerné.
+
+Les fichiers PNG sont créés lorsqu'ils sont demandés, dans `%USERPROFILE%\medical-data\qrcodes`, hors du site web. Pour générer à l'avance les QR codes manquants de tous les patients, après compilation et démarrage de MariaDB :
+
+```powershell
+.\generer-qrcodes.bat
+```
+
+Les identifiants de connexion MariaDB sont les mêmes que pour l'application. Pour choisir un autre répertoire, ajouter `-Dmedical.qr.dir=CHEMIN` à la commande Java et à la configuration de Tomcat. Une image conservée après la suppression d'un patient n'est plus accessible par l'application.
+
+L'adresse utilisée pour les QR codes est `http://172.16.1.156:8081/Medical` (adresse Wi-Fi actuelle de cet ordinateur). Le téléphone doit pouvoir joindre cet ordinateur sur le réseau. Si l'adresse change ou pour utiliser un domaine, définir `MEDICAL_PUBLIC_BASE_URL` avant de démarrer Tomcat **et** avant d'exécuter le programme autonome, puis régénérer les QR codes :
+
+```powershell
+$env:MEDICAL_PUBLIC_BASE_URL = 'http://ADRESSE_DU_PC:8081/Medical'
+.\generer-qrcodes.bat
+.\start-tomcat.bat
+```
+
+Redémarrer Tomcat si nécessaire. Pour une utilisation réelle, utiliser HTTPS et limiter l'accès au réseau ; les anciens QR codes imprimés continuent de contenir leur ancienne URL. Les fichiers sont versionnés selon l'URL afin qu'un changement d'adresse crée une nouvelle image sans modifier les anciennes.
+

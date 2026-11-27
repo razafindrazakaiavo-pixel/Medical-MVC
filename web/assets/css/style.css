@@ -198,3 +198,25 @@ dd {
     }
 
 }
+
+.qr-thumbnail {
+    width: 90px;
+    height: 90px;
+    display: block;
+}
+
+.patient-qr {
+    display: inline-block;
+    text-align: center;
+    padding: 12px;
+    border: 1px solid #dce8e7;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.patient-qr img {
+    display: block;
+    width: 180px;
+    height: 180px;
+    margin: auto;
+}

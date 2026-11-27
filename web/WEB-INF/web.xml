@@ -36,7 +36,15 @@
         <servlet-class>src.FrontControllerServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-<servlet-mapping>
+    <servlet>
+        <servlet-name>QrCode</servlet-name>
+        <servlet-class>iavo.main.servlet.QrCodeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>QrCode</servlet-name>
+        <url-pattern>/patient/qrcode</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>FrontController</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
