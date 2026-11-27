@@ -22,6 +22,11 @@
         <input type="hidden" name="id" value="<%= h(patient.id) %>">
         <% if (edit) { %>
             <p>Identifiant unique : <strong><%= h(patient.id) %></strong></p>
+            <div class="patient-qr">
+                <img src="<%= base %>/patient/qrcode?id=<%= h(patient.id) %>" alt="QR code du patient">
+                <p>Scannez ce QR code pour consulter les informations du patient au format JSON après connexion.</p>
+                <a href="<%= base %>/patient/qrcode?id=<%= h(patient.id) %>" target="_blank" rel="noopener">Ouvrir le QR code</a>
+            </div>
         <% } %>
         <div class="grid">
             <label>Nom *

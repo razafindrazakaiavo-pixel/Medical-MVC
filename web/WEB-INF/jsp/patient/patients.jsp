@@ -21,6 +21,7 @@
                     <th>Patient</th>
                     <th>Identifiant unique</th>
                     <th>Naissance</th>
+                    <th>QR code</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -33,6 +34,12 @@
                         </td>
                         <td><small><%= h(patient.id) %></small></td>
                         <td><%= h(patient.naissance) %></td>
+                        <td>
+                            <a href="<%= base %>/patient/qrcode?id=<%= h(patient.id) %>" target="_blank" rel="noopener">
+                                <img class="qr-thumbnail" src="<%= base %>/patient/qrcode?id=<%= h(patient.id) %>"
+                                     alt="QR code du patient <%= h(patient.nom) %> <%= h(patient.prenom) %>">
+                            </a>
+                        </td>
                         <td>
                             <a href="<%= base %>/patient/modifier?id=<%= h(patient.id) %>">Voir / modifier</a>
                             <form class="inline" method="post" action="<%= base %>/patient/supprimer"

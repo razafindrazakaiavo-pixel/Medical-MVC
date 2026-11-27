@@ -8,6 +8,11 @@
     <% if (patient == null) { %>
         <p>Dossier introuvable.</p>
     <% } else { %>
+        <div class="patient-qr">
+            <img src="<%= base %>/patient/qrcode?id=<%= h(patient.id) %>" alt="Mon QR code patient">
+            <p>Scannez ce QR code pour consulter les informations du patient au format JSON après connexion.</p>
+            <a href="<%= base %>/patient/qrcode?id=<%= h(patient.id) %>" target="_blank" rel="noopener">Ouvrir le QR code</a>
+        </div>
         <dl>
             <dt>Identifiant unique</dt>
             <dd><%= h(patient.id) %></dd>
