@@ -1,0 +1,46 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="iavo.main.model.Patient,iavo.main.model.User" %>
+<%!
+    private String h(Object value) {
+        if (value == null) {
+            return "";
+        }
+        return value.toString()
+                .replace("&", "&amp;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;")
+                .replace("\"", "&quot;")
+                .replace("'", "&#39;");
+    }
+%>
+<%
+    String base = request.getContextPath();
+    User current = (User) session.getAttribute("user");
+    String token = (String) session.getAttribute("csrf");
+%>
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Medical</title>
+    <link rel="stylesheet" href="<%= base %>/assets/css/style.css">
+</head>
+<body>
+<header>
+    <a class="brand" href="<%= base %>/accueil">Medical</a>
+    <nav>
+        <% if (current == null) { %>
+            <a href="<%= base %>/connexion">Connexion</a>
+        <% } else { %>
+            <a href="<%= base %>/tableau">Mon espace</a>
+            <span><%= h(current.login) %> · <%= h(current.role) %></span>
+            <form method="post" action="<%= base %>/deconnexion">
+                <input type="hidden" name="csrf" value="<%= h(token) %>">
+                <button class="link">Déconnexion</button>
+            </form>
+        <% } %>
+    </nav>
+</header>
+<main>
+
